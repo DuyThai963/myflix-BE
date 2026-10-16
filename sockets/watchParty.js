@@ -1,4 +1,3 @@
-// Socket.io Watch Party Engine - Initial Prototype
 const { redisClient } = require('../configs/db');
 
 const memoryRooms = {};
