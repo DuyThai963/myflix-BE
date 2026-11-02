@@ -1,0 +1,2 @@
+// Entrypoint forwarder for Render and cloud hosts
+require('./server.js');

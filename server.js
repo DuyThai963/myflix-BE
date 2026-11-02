@@ -83,6 +83,19 @@ if (pubClient && subClient) {
 // 🔌 Kích hoạt kiến trúc điều phối phòng Realtime
 require('./sockets/watchParty')(io);
 
+// 🏠 Root & Healthcheck endpoints cho Render Cloud
+app.get("/", (req, res) => {
+  res.json({
+    status: "online",
+    name: "MyFlix Backend Service",
+    timestamp: new Date().toISOString()
+  });
+});
+
+app.get("/health", (req, res) => {
+  res.status(200).send("OK");
+});
+
 // 🔗 3. ĐĂNG KÝ HỆ THỐNG ROUTER ĐÃ CHIA MODULAR SẠCH SẼ
 app.use("/api/auth", require("./routes/auth"));
 app.use("/api/history", require("./routes/history"));
@@ -100,6 +113,6 @@ app.use((err, req, res, next) => {
 });
 
 const PORT = config.PORT || 5000;
-server.listen(PORT, () => {
+server.listen(PORT, '0.0.0.0', () => {
   console.log(`Server ready on port ${PORT}`);
 });
